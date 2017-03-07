@@ -2,14 +2,22 @@ version: "2"
     
 services:
 
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile-client
+    links:
+      - ftp-server
+    command: sleep 999999999999
+
   ftp-server:
     build:
       context: .
     hostname: my-ftp-server
     image: reduardo7/ftp
-    ports:
-      - "11021:21"
-      - "65000-65004:65000-65004"
+    #ports:
+    #  - "11021:21"
+    #  - "65000-65004:65000-65004"
     volumes:
       - .data:/data
     environment:
