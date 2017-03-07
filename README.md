@@ -10,7 +10,7 @@ The simplest case is to specify user name and password when starting
 the container:
 
 ```
-docker run -p 11021:21 -it --rm -e FTP_USER=scott -e FTP_PASS=tiger -e HOST=publicname.example.com mcreations/openwrt-ftp
+docker run -p 11021:21 -it --rm -e FTP_USER=username -e FTP_PASS=tiger -e HOST=publicname.example.com reduardo7/ftp
 ```
 
 Note that ```HOST``` signifies the name or IP with which the docker
@@ -33,22 +33,15 @@ down the range with the environment variables ```PASV_MIN_PORT``` and
 ```
 docker run -it --rm \
             -p 11021:21 \
-            -e FTP_USER=scott -e FTP_PASS=tiger -e HOST=myserver.domain.com \
+            -e FTP_USER=username -e FTP_PASS=pass -e HOST=myserver.domain.com \
             -p 65000-65004:65000-65004 \
             -e PASV_MIN_PORT=65000 -e PASV_MAX_PORT=65004 \
-            mcreations/ftp
+            reduardo7/ftp
 ```
 
 Here, the ```PASV_MIN_PORT``` variable could be omitted as it defaults to 65000.
 
-Contributors
-------------
-
-Many thanks to the following people who contributed to the project:
-
-- Arnaud de Mouhy
-
 Github Repo
 -----------
 
-https://github.com/m-creations/docker-openwrt-ftp
+https://github.com/reduardo7/docker-openwrt-ftp

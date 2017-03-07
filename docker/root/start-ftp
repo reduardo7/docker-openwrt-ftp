@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ -z $HOST ] ; then
-    echo
-    echo "ERROR: you MUST specify a host name or an IP, which will be used as the target for PASV command"
-    echo
-    exit 1
+if [ -z $HOST ]; then
+  echo
+  echo "ERROR: you MUST specify a host name or an IP, which will be used as the target for PASV command"
+  echo
+  exit 1
 fi
 
 RESOLVE_HOSTNAME=YES
@@ -20,16 +20,15 @@ mkdir -m 0755 -p /var/run
 existing=$(grep $FTP_USER /etc/passwd | cut -f 1 -d :)
 
 mkdir -m 0755 -p /data
-chown root:root /data
 
 if [ "$existing" = "$FTP_USER" ] ; then
-    usermod -d /data/$FTP_USER -s /bin/false -g ftp -p $(openssl passwd $FTP_PASS) $FTP_USER
+  echo
+  echo "ERROR: FTP_USER='$FTP_USER' is not valid"
+  echo
+  exit 1
 else
-    useradd -d /data/$FTP_USER -s /bin/false -g ftp -p $(openssl passwd $FTP_PASS) $FTP_USER
+  useradd -d /data -s /bin/false -g ftp -p $(openssl passwd $FTP_PASS) $FTP_USER
 fi
-
-mkdir -p /data/$FTP_USER/incoming
-chown -R $FTP_USER:ftp /data/$FTP_USER
 
 cat <<EOF> /etc/vsftpd.conf
 

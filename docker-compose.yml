@@ -1,0 +1,20 @@
+version: "2"
+    
+services:
+
+  ftp-server:
+    build:
+      context: .
+    hostname: my-ftp-server
+    image: reduardo7/ftp
+    ports:
+      - "11021:21"
+      - "65000-65004:65000-65004"
+    volumes:
+      - .data:/data
+    environment:
+      FTP_USER: "username"
+      FTP_PASS: "tiger"
+      HOST: "my-ftp-server"
+      PASV_MIN_PORT: "65000"
+      PASV_MAX_PORT: "65004"

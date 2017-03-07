@@ -1,7 +1,7 @@
 ## -*- docker-image-name: "mcreations/openwrt-ftp" -*-
 
 FROM mcreations/openwrt-x64
-MAINTAINER Kambiz Darabi <darabi@m-creations.net>
+MAINTAINER Eduardo Cuomo <reduardo7@gmail.com>
 
 ENV FTP_USER ftp
 ENV FTP_PASS changeit
@@ -14,7 +14,7 @@ ENV HOST localhost
 ENV PASV_MIN_PORT 65000
 ENV PASV_MAX_PORT 65100
 
-ADD image/root/ /
+ADD docker/root/ /
 
 RUN opkg update &&\
     opkg install --force-checksum vsftpd shadow-useradd shadow-groupadd shadow-usermod openssl-util &&\
